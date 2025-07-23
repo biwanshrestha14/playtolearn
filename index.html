@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Playtolearn</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+   <nav>
+        <div class="navi">
+            <img class="logo" src="logofinal.png" alt="Logo" />
+            <h1>Playtolearn</h1>
+        </div>
+        
+        <!-- Hamburger Toggle -->
+        <label class="hamburger" for="menu-toggle">
+            <div></div>
+            <div></div>
+            <div></div>
+        </label>
+        <input type="checkbox" id="menu-toggle" />
+        
+        <div class="menu">
+            <ul>
+                <li>About us</li>
+                <li>Our people</li>
+                <li>Program</li>
+                <li>Resource</li>
+            </ul>
+        </div>
+    </nav>
+<section class="vision">
+        <div class="intro">
+            <h1>Introduction</h1>
+            <p>
+                <span class="highlight">Play 2 Learn</span> is an educational initiative designed to spark <span class="highlight">curiosity</span> in
+                young children through <span class="highlight">playful and engaging activities</span>. Rather than using
+                traditional teaching methods, our approach focuses on <span class="highlight">learning through
+                play</span>; helping children explore, ask questions, and enjoy the process of
+                discovering new things.
+                <br /><br />
+                At the heart of the program are trained youth volunteers, known as
+                "<span class="highlight">Learning Buddies</span>," who guide children through games that encourage
+                <span class="highlight">curiosity, creativity, and joy</span>. Learning Buddies are recent SEE
+                graduates, high school students, undergraduate or graduate level students
+                primarily from Makwanpaur district.
+                <br /><br />
+                Play 2 Learn operates in schools through short sessions that include a
+                variety of <span class="highlight">age-appropriate games and activities</span>. These sessions are
+                designed to fit into the school day without disrupting the regular
+                routine. The games are carefully selected to keep children engaged while
+                promoting skills such as <span class="highlight">observation, thinking, and problem-solving</span>.
+                <br /><br />
+                Our core belief is that <span class="highlight">curiosity is a natural gift</span> in every child and by
+                nurturing it early, we help build a strong foundation for <span class="highlight">lifelong
+                learning</span>. At its core, Play 2 Learn is about preserving and promoting one
+                of the most powerful gifts we all share — <span class="highlight">curiosity</span>.
+            </p>
+        </div>
+
+        <div class="wallpaper-card">
+            <img src="WhatsApp Image 2025-07-23 at 10.21.06 PM.jpeg" alt="Learning illustration" class="wallpaper-image">
+        </div>
+    </section>
+<section class="our-vision">
+  <div class="vision-content">
+    <h2>Our Vision</h2>
+    <p>
+      Play 2 Learn is run by young people, for young people. Our vision is to provide a unique model of learning to young children which is interesting and easy to grasp. We inspire young volunteers to make a meaningful impact in their communities by engaging with one of the most important causes: education. We believe that with good ideas and a sincere heart, anyone can contribute to positive change.
+    </p>
+    <p>
+      Our focus is not to teach in the traditional sense, but to inspire a love of learning; encouraging children to explore, question, and grow with confidence. Additionally, through our program, we equip volunteers (Learning Buddies) with the skills to lead playful, curiosity-driven activities that bring joy to young children and spark their interest in learning.
+    </p>
+    <p>
+      We strive to inspire a sense of social responsibility in our volunteers.
+    </p>
+  </div>
+</section>
+<section class="our-mission">
+  <div class="mission-content">
+    <h2>Our Mission</h2>
+    <p>
+      Our mission is to create joyful, curiosity-driven learning experiences for young children by mobilizing passionate youth volunteers. We aim to nurture a love for learning that goes beyond classrooms and textbooks, making education fun, meaningful, and accessible.
+    </p>
+    <p>
+      Through simple games and thoughtful guidance, we want children to explore their natural curiosity, and help young volunteers grow into empathetic, responsible leaders who care deeply about their communities and the future of education in Nepal.
+    </p>
+  </div>
+</section>
+
+
+ <script>
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(255, 255, 255, 0.2)';
+                nav.style.padding = '0.5rem 2rem';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.1)';
+                nav.style.padding = '1rem 2rem';
+            }
+        });
+
+        // Close mobile menu when clicking on menu items
+        const menuItems = document.querySelectorAll('.menu li');
+        const menuToggle = document.getElementById('menu-toggle');
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                menuToggle.checked = false;
+            });
+        });
+
+        // Add ripple effect on menu item click
+        menuItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.6s ease-out;
+                    pointer-events: none;
+                `;
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(2);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
