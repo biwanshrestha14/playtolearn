@@ -31,7 +31,20 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            height: 80px;
+        }
+
+        .navi {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .navi h1 {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .logo {
