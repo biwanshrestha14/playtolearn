@@ -14,6 +14,7 @@ import JengaStructure from './components/games/JengaStructure';
 import PotatoStick from './components/games/PotatoStick';
 import CardboardCraft from './components/games/CardboardCraft';
 import Sessions from './components/Sessions';
+import Owner from './components/Owner';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/why-us" element={<WhyUs />} />
           <Route path="/team">
+            <Route path='Owner' element={<Owner />} />
             <Route path='members' element={<Member />} />
             <Route path='alumini' element={<Alumini />} />
             <Route path='playmaker' element={<Playmaker />} />

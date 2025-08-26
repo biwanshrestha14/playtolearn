@@ -1,7 +1,7 @@
-import React from 'react';
 import Hero from '../components/Hero';
 import WhatWeOffer from '../components/WhatWeOffer';
 import KeyBenefits from '../components/KeyBenefits';
+import OurImpact from '../components/OurImpacts';
 
 const Home = () => {
   return (
@@ -9,6 +9,7 @@ const Home = () => {
       <Hero />
       <WhatWeOffer />
       <KeyBenefits/>
+      <OurImpact/>
     </>
   );
 };

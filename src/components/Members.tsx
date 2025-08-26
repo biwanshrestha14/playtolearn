@@ -1,6 +1,7 @@
+import { useState } from "react";
 
 const Members = () => {
-    const teamLeaders = [
+   const teamLeaders = [
     {
       name: "Raghav Lamichhane",
       description: "I am Raghav Lamichhane. That is all about me. Just an open page of the book who loves to write and play cricket.",
@@ -15,7 +16,7 @@ const Members = () => {
     },
     {
       name: "Sarbagya Parajuli",
-      description: "Hardworking, Consistent, Humble, Dependable, Committed",
+      description: "Passionate about guiding children and working alongside dedicated individuals to create a fun, inspiring, and impactful learning environment.",
       image: "/team/sarbagya.jpg",
       role: "Team Leader"
     },
@@ -27,7 +28,7 @@ const Members = () => {
     },
     {
       name: "Anjal Adhikari",
-      description: "I am Anjal Adhikari currently working at fun play run. I am studying BBS at makawanpur multiple campus. I love travelling.",
+      description: "Passionate about inspiring young minds through Play to Learn, I create fun, engaging, and interactive activities that make learning enjoyable while helping children build creativity, confidence, and essential life skills.",
       image: "/team/anjal.jpg",
       role: "Team Leader"
     },
@@ -50,96 +51,122 @@ const Members = () => {
       role: "Team Leader"
     }
   ];
-  const TeamCard = ({ member }: { member: typeof teamLeaders[0] }) => (
-    <div className="group relative bg-white bg-opacity-10 backdrop-blur-md rounded-3xl p-6 border border-white border-opacity-20 shadow-2xl hover:transform hover:-translate-y-3 hover:shadow-4xl hover:bg-opacity-15 transition-all duration-500 overflow-hidden">
-      {/* Animated background gradient */}
+
+  const [selectedMember, setSelectedMember] = useState(null);
+
+  const TeamCard = ({ member }) => (
+    <div
+      onClick={() => setSelectedMember(member)}
+      className="cursor-pointer group relative bg-white bg-opacity-10 backdrop-blur-md rounded-3xl p-6 border border-white border-opacity-20 shadow-2xl hover:-translate-y-3 hover:shadow-4xl hover:bg-opacity-15 transition-all duration-500 overflow-hidden w-64 h-96 flex flex-col"
+    >
+      {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      
-      {/* Shine effect */}
       <div className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-gradient-to-br from-transparent via-white/10 to-transparent transform -translate-x-full -translate-y-full rotate-45 group-hover:translate-x-full group-hover:translate-y-full transition-transform duration-700" />
-      
-      <div className="relative z-10">
+
+      <div className="relative z-10 flex flex-col h-full">
         {/* Profile Image */}
-        <div className="relative mb-6 mx-auto w-32 h-32 rounded-full overflow-hidden ring-4 ring-white/20 group-hover:ring-white/40 transition-all duration-300">
-          {/* Gradient background as fallback */}
+        <div className="relative mb-4 mx-auto w-32 h-32 rounded-full overflow-hidden ring-4 ring-white/20 group-hover:ring-white/40 transition-all duration-300 flex-shrink-0">
           <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
             <div className="text-white text-4xl font-bold">
-              {member.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+              {member.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
             </div>
           </div>
-          {/* Actual image - shows by default if available */}
-          <img 
-            src={member.image} 
+          <img
+            src={member.image}
             alt={member.name}
             className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            onLoad={(e) => {
-              // Hide the gradient background when image loads successfully
-              const gradientBg = (e.target as HTMLImageElement).previousElementSibling as HTMLElement;
-              if (gradientBg) gradientBg.style.opacity = '0';
-            }}
-            onError={(e) => {
-              // Show gradient background if image fails to load
-              (e.target as HTMLImageElement).style.display = 'none';
-              const gradientBg = (e.target as HTMLImageElement).previousElementSibling as HTMLElement;
-              if (gradientBg) gradientBg.style.opacity = '1';
-            }}
+            onError={(e) => (e.currentTarget.style.display = "none")}
           />
         </div>
 
         {/* Role Badge */}
-        <div className="mb-4 text-center">
-          <span className={`inline-block px-4 py-2 rounded-full text-sm font-semibold ${
-            member.role === 'Team Leader' 
-              ? 'bg-yellow-500/20 text-yellow-300 border border-yellow-400/30' 
-              : 'bg-green-500/20 text-green-300 border border-green-400/30'
-          }`}>
+        <div className="mb-4 text-center flex-shrink-0">
+          <span className="inline-block px-4 py-2 rounded-full text-sm font-semibold bg-yellow-500/20 text-yellow-300 border border-yellow-400/30">
             {member.role}
           </span>
         </div>
 
         {/* Name */}
-        <h3 className="text-white text-xl font-bold text-center mb-4 group-hover:text-yellow-300 transition-colors duration-300">
+        <h3 className="text-white text-xl font-bold text-center mb-2 group-hover:text-yellow-300 transition-colors duration-300 flex-shrink-0">
           {member.name}
         </h3>
 
-        {/* Description */}
-        <p className="text-gray-100 text-sm leading-relaxed text-center line-clamp-4 group-hover:text-white transition-colors duration-300">
+        {/* Short Description */}
+        <p className="text-gray-100 text-sm leading-relaxed text-center line-clamp-4 flex-grow mb-3">
           {member.description}
         </p>
 
-        {/* Decorative element */}
-        <div className="mt-6 flex justify-center">
+        {/* Decorative bar */}
+        <div className="mt-4 flex justify-center flex-shrink-0">
           <div className="w-12 h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent rounded-full group-hover:via-yellow-300/70 transition-all duration-300" />
         </div>
       </div>
     </div>
   );
+
   return (
     <div>
-         <div className="mb-20">
-          <h2 className="text-green-300 text-3xl lg:text-4xl font-bold text-center mb-12 drop-shadow-lg">
-            Team Leaders
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {teamLeaders.map((member, index) => (
-              <TeamCard key={index} member={member} />
-            ))}
-          </div>
+      <h2 className="text-green-300 text-3xl lg:text-4xl font-bold text-center mb-12 mt-4">
+        Team Leaders
+      </h2>
+
+      {/* Centered grid like alumni section */}
+      <div className="flex justify-center">
+        <div className="flex flex-wrap justify-center gap-8">
+          {teamLeaders.map((member) => (
+            <TeamCard key={member.id} member={member} />
+          ))}
         </div>
-        <div className="text-center mt-16">
-          <div className="bg-white bg-opacity-15 backdrop-blur-md rounded-3xl p-8 border border-white border-opacity-20 shadow-3xl max-w-4xl mx-auto">
-            <h3 className="text-yellow-300 text-2xl lg:text-3xl font-bold mb-4">
-              Together We Make Learning Joyful
+      </div>
+
+      {/* Footer */}
+      <div className="text-center mt-16">
+        <div className="bg-white bg-opacity-15 backdrop-blur-md rounded-3xl p-8 border border-white border-opacity-20 shadow-3xl max-w-4xl mx-auto">
+          <h3 className="text-yellow-300 text-2xl lg:text-3xl font-bold mb-4">
+            Together We Make Learning Joyful
+          </h3>
+          <p className="text-white text-lg leading-relaxed">
+            Each member of our team brings unique strengths, perspectives, and
+            passion to Play2Learn. Together, we create magical learning
+            experiences that inspire children and empower communities.
+          </p>
+        </div>
+      </div>
+
+      {/* Modal */}
+      {selectedMember && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+          <div className="relative bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20 shadow-2xl max-w-2xl w-full text-white">
+            <button
+              onClick={() => setSelectedMember(null)}
+              className="absolute top-4 right-4 text-white hover:text-red-400 text-2xl"
+            >
+              ✕
+            </button>
+
+            <div className="w-40 h-40 mx-auto rounded-full overflow-hidden mb-6 ring-4 ring-white/20">
+              <img
+                src={selectedMember.image}
+                alt={selectedMember.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            <h3 className="text-2xl font-bold text-center mb-2 text-yellow-300">
+              {selectedMember.name}
             </h3>
-            <p className="text-white text-lg leading-relaxed">
-              Each member of our team brings unique strengths, perspectives, and passion to Play2Learn. 
-              Together, we create magical learning experiences that inspire children and empower communities.
+            <p className="text-center text-yellow-200 font-semibold mb-6">
+              {selectedMember.role}
+            </p>
+
+            <p className="text-gray-100 leading-relaxed text-center">
+              {selectedMember.description}
             </p>
           </div>
         </div>
-      
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default Members
+export default Members;
