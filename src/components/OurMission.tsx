@@ -1,4 +1,4 @@
-import React from 'react';
+// React import removed as it's unused in TSX with React 17+
 
 const OurMission = () => {
   return (

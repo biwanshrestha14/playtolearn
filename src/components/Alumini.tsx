@@ -1,7 +1,15 @@
 import { useState } from "react";
 
+type PlaymakerMember = {
+    name: string;
+    description: string;
+    image: string;
+    role: string;
+    fullDetail?: string;
+};
+
 const Playmaker = () => {
- const playmakers = [
+ const playmakers: PlaymakerMember[] = [
         {
             name: "Srijal Basnet",
             description: "I'm a natural leader. I've received a promotion to a leadership role in almost every job because I like to help people. I find coworkers usually come to me with questions or concerns even when I'm not in a leadership role because if I don't know the answer, I'll at least point them in the right direction.",
@@ -123,9 +131,9 @@ const Playmaker = () => {
             role: "Alumni"
         }
     ];
-  const [selectedMember, setSelectedMember] = useState(null);
+  const [selectedMember, setSelectedMember] = useState<PlaymakerMember | null>(null);
 
-  const TeamCard = ({ member }) => (
+  const TeamCard = ({ member }: { member: PlaymakerMember }) => (
     <div
       onClick={() => setSelectedMember(member)}
       className="cursor-pointer group relative bg-white bg-opacity-10 backdrop-blur-md rounded-3xl p-6 border border-white border-opacity-20 shadow-2xl hover:-translate-y-3 hover:shadow-4xl hover:bg-opacity-15 transition-all duration-500 overflow-hidden w-64 h-96 flex flex-col"
@@ -139,7 +147,7 @@ const Playmaker = () => {
         <div className="relative mb-4 mx-auto w-32 h-32 rounded-full overflow-hidden ring-4 ring-white/20 group-hover:ring-white/40 transition-all duration-300 flex-shrink-0">
           <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-green-400 to-teal-500 flex items-center justify-center">
             <div className="text-white text-4xl font-bold">
-              {member.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+              {member.name.split(" ").map((n: string) => n[0]).join("").slice(0, 2)}
             </div>
           </div>
           <img
@@ -185,7 +193,7 @@ const Playmaker = () => {
       <div className="flex justify-center">
         <div className="flex flex-wrap justify-center gap-8">
           {playmakers.map((member) => (
-            <TeamCard key={member.id} member={member} />
+            <TeamCard key={member.name} member={member} />
           ))}
         </div>
       </div>

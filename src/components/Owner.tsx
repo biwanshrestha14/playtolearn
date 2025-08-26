@@ -1,7 +1,15 @@
 import { useState } from "react";
 
+type Leader = {
+    id: number;
+    name: string;
+    description: string;
+    image: string;
+    role: string;
+};
+
 const Members = () => {
-    const teamLeaders = [
+    const teamLeaders: Leader[] = [
         {
             id: 1,
             name: "Kishu Kuikel",
@@ -21,9 +29,9 @@ const Members = () => {
 
     ];
 
-    const [selectedMember, setSelectedMember] = useState(null);
+    const [selectedMember, setSelectedMember] = useState<Leader | null>(null);
 
-    const TeamCard = ({ member }) => (
+    const TeamCard = ({ member }: { member: Leader }) => (
         <div
             onClick={() => setSelectedMember(member)}
             className="cursor-pointer group relative bg-white bg-opacity-10 backdrop-blur-md rounded-3xl p-6 border border-white border-opacity-20 shadow-2xl hover:-translate-y-3 hover:shadow-4xl hover:bg-opacity-15 transition-all duration-500 overflow-hidden w-96 h-96 flex flex-col"
@@ -37,7 +45,7 @@ const Members = () => {
                 <div className="relative mb-4 mx-auto w-32 h-32 rounded-full overflow-hidden ring-4 ring-white/20 group-hover:ring-white/40 transition-all duration-300 flex-shrink-0">
                     <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
                         <div className="text-white text-4xl font-bold">
-                            {member.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+                            {member.name.split(" ").map((n: string) => n[0]).join("").slice(0, 2)}
                         </div>
                     </div>
                     <img

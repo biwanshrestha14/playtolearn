@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 
-const colleges = [
+type College = {
+  id: number;
+  name: string;
+  image: string;
+  coords: number[];
+  mapUrl: string;
+};
+
+const colleges: College[] = [
   
     {
       id: 1,
@@ -134,7 +142,7 @@ const colleges = [
     }
 ];
 const Partners = () => {
-  const [selectedCollege, setSelectedCollege] = useState(null);
+  const [selectedCollege, setSelectedCollege] = useState<College | null>(null);
 
   return (
     <section className="py-20 px-4 bg-gradient-to-br from-blue-600 to-purple-700 relative">
@@ -182,7 +190,7 @@ const Partners = () => {
               width="100%"
               height="100%"
               style={{ border: 0 }}
-              allowFullScreen=""
+              allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               title={selectedCollege.name}
